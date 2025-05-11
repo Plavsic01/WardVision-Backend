@@ -11,10 +11,13 @@ const mapChampionsInfo = (champions) => {
 const mapChampionInfo = (name, champion) => {
   const championData = {
     id: champion.id,
-    name: name,
+    name: champion.name,
     icon: champion.image.full,
     tag: champion.tags[0],
-    difficulty: Math.round((champion.info.difficulty / 10) * 5),
+    difficulty:
+      champion.info.difficulty !== 0
+        ? Math.round((champion.info.difficulty / 10) * 5)
+        : 3,
   };
   return championData;
 };
@@ -35,7 +38,10 @@ const mapChampionDetails = (champion) => {
     name: champion.name,
     tag: champion.tags[0],
     title: champion.title,
-    difficulty: Math.round((champion.info.difficulty / 10) * 5),
+    difficulty:
+      champion.info.difficulty !== 0
+        ? Math.round((champion.info.difficulty / 10) * 5)
+        : 3,
     splashArt: `${champion.id}_${champion.skins[0].num}`,
     lore: champion.lore,
     stats: [
