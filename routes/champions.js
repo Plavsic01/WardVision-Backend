@@ -11,6 +11,7 @@ router.get("/", async (req, res) => {
 
     const champions = await fs.readJSON(championsJSON);
     const mappedChampions = championUtils.mapChampionsInfo(champions);
+
     return res.json(mappedChampions);
   } catch (error) {
     res.status(500).json({ error: "Error while getting summoner details" });

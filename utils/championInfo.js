@@ -11,6 +11,7 @@ const mapChampionsInfo = (champions) => {
 const mapChampionInfo = (name, champion) => {
   const championData = {
     id: champion.id,
+    key: champion.key,
     name: champion.name,
     icon: champion.image.full,
     tag: champion.tags[0],

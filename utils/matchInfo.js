@@ -6,7 +6,8 @@ const mapMatchInfo = (data, currSummPuuid) => {
     platformId: data.info.platformId,
     gameType: formatTypeOfGame(data.info.queueId),
     gameDuration: calculateGameLength(data.info.gameDuration),
-    gameCreation: timeAgo(data.info.gameCreation),
+    // gameCreation: timeAgo(data.info.gameCreation),
+    gameCreation: timeAgo(data.info.gameEndTimestamp),
     currentSummoner: findCurrentSummoner(data.info.participants, currSummPuuid),
     teams: mapPlayersToTeams(data.info.participants),
   };
@@ -16,6 +17,7 @@ const mapMatchInfo = (data, currSummPuuid) => {
 const calculateGameLength = (seconds) => {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
+  if (remainingSeconds === 0) return `${minutes}m`;
   return `${minutes}m ${remainingSeconds}s`;
 };
 
@@ -105,7 +107,10 @@ const mapPlayerDetails = (players) => {
       gameName: player.riotIdGameName,
       tagLine: player.riotIdTagline,
       puuid: player.puuid,
-      championName: player.championName,
+      championName:
+        player.championName !== "FiddleSticks"
+          ? player.championName
+          : "Fiddlesticks",
       items: [
         { id: uuidv4(), itemId: player.item0 },
         { id: uuidv4(), itemId: player.item1 },
