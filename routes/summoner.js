@@ -41,4 +41,17 @@ router.get("/:region/:gameName/:tagLine", async (req, res) => {
   }
 });
 
+router.get("/:puuid", async (req, res) => {
+  try {
+    const { puuid } = req.params;
+
+    const summonerInfo = await riot.getSummonerAccount("europe", puuid);
+    res.json(summonerInfo);
+  } catch (error) {
+    res
+      .status(error.status)
+      .json({ error: "Error while getting summoner basic info" });
+  }
+});
+
 module.exports = router;

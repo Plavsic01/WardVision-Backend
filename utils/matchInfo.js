@@ -6,7 +6,6 @@ const mapMatchInfo = (data, currSummPuuid) => {
     platformId: data.info.platformId,
     gameType: formatTypeOfGame(data.info.queueId),
     gameDuration: calculateGameLength(data.info.gameDuration),
-    // gameCreation: timeAgo(data.info.gameCreation),
     gameCreation: timeAgo(data.info.gameEndTimestamp),
     currentSummoner: findCurrentSummoner(data.info.participants, currSummPuuid),
     teams: mapPlayersToTeams(data.info.participants),

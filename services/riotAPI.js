@@ -47,6 +47,15 @@ https: module.exports = {
       .then((r) => r.data);
   },
 
+  // Getting summoner account info
+  getSummonerAccount: (region, puuid) => {
+    return axios
+      .get(`${baseURL(region)}/riot/account/v1/accounts/by-puuid/${puuid}`, {
+        headers: header,
+      })
+      .then((r) => r.data);
+  },
+
   // Getting champion rotation (every week changes)
   getChampionRotation: (region) => {
     return axios
@@ -61,6 +70,19 @@ https: module.exports = {
       .get(`${baseURL(region)}/lol/league/v4/entries/by-puuid/${puuid}`, {
         headers: header,
       })
+      .then((r) => r.data);
+  },
+  // Getting Challenger leaderboard stats
+  getChallengerLeaderboard: (region, queueType) => {
+    return axios
+      .get(
+        `${baseURL(
+          region
+        )}/lol/league/v4/challengerleagues/by-queue/${queueType}`,
+        {
+          headers: header,
+        }
+      )
       .then((r) => r.data);
   },
 };

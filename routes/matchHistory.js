@@ -28,12 +28,6 @@ router.get("/:region/:puuid/:start/:count", async (req, res) => {
       count
     );
 
-    // const data = await Promise.all(
-    //   matchHistory.map((matchId) => riot.getMatch(formattedRegion, matchId))
-    // );
-
-    // const mappedMatches = data.map((match) => mapMatchInfo(match, puuid));
-
     const mappedMatches = [];
 
     const results = await Promise.allSettled(
@@ -57,38 +51,5 @@ router.get("/:region/:puuid/:start/:count", async (req, res) => {
     res.status(404).json({ error: "Error while getting match history" });
   }
 });
-
-// SPECIFIC MATCH DATA
-
-// router.get("/:region/:matchId", async (req, res) => {
-//   try {
-//     const { region, matchId } = req.params;
-
-//     const CACHE_KEY = `${region}_${matchId}_match`;
-
-//     const cachedData = cache.matchCache.get(CACHE_KEY);
-
-//     if (cachedData) {
-//       console.log("Serving from match cache");
-//       return res.json(cachedData);
-//     }
-
-//     const match = await riot.getMatch(getRegion(region), matchId);
-
-//     // MAP HERE
-//     const mappedData = mapMatchInfo(match);
-
-//     console.log(mappedData);
-
-//     cache.matchCache.set(CACHE_KEY, match);
-//     console.log("Match Fetched from Riot API");
-
-//     return res.json(match);
-//   } catch (error) {
-//     console.log(error);
-
-//     res.status(404).json({ error: "Error while getting match history" });
-//   }
-// });
 
 module.exports = router;

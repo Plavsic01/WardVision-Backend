@@ -7,6 +7,7 @@ app.use(cors());
 
 const rotation = require("./routes/championRotation");
 const summoner = require("./routes/summoner");
+const leaderboard = require("./routes/leaderboard");
 const ranked = require("./routes/ranked");
 const matchHistory = require("./routes/matchHistory");
 const champions = require("./routes/champions");
@@ -15,6 +16,7 @@ const spells = require("./routes/spells");
 
 app.use("/api/rotation", rotation);
 app.use("/api/summoner", summoner);
+app.use("/api/leaderboard", leaderboard);
 app.use("/api/ranked", ranked);
 app.use("/api/match-history", matchHistory);
 app.use("/api/champions", champions);

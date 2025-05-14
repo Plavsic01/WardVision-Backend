@@ -4,6 +4,7 @@ const riot = require("../services/riotAPI");
 const cache = require("../utils/cache");
 const mapRankedInfo = require("../utils/rankedInfo");
 const path = require("path");
+const { log } = require("console");
 
 router.get("/icon/:tier", async (req, res) => {
   const filePath = path.join(
@@ -53,7 +54,7 @@ router.get("/:region/:puuid", async (req, res) => {
     console.log("Ranked Stats Fetched from Riot API");
     return res.json(rankedJSON);
   } catch (error) {
-    res.status(error.status).json({ error: "Error while getting ranked data" });
+    res.status(500).json({ error: "Error while getting ranked data" });
   }
 });
 
