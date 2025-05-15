@@ -34,7 +34,7 @@ router.get("/:region/:queueType", async (req, res) => {
     const playersLeaderboard = [];
 
     leaderboard?.entries
-      .slice(0, 100)
+      .slice(0, 50)
       .forEach((rankInfo, indx) =>
         playersLeaderboard.push(
           mapRankedInfo(formattedQueueType, rankInfo, true, indx + 1)
@@ -45,7 +45,6 @@ router.get("/:region/:queueType", async (req, res) => {
     console.log("Leaderboard - Fetched from Riot API");
     return res.json(playersLeaderboard);
   } catch (error) {
-    console.log(error);
     res.status(404).json({ error: "Error while getting match history" });
   }
 });
